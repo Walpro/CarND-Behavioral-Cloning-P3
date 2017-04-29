@@ -45,6 +45,8 @@ Using the Udacity provided simulator and my drive.py file, the car can be driven
 ```sh
 python drive.py model.h5
 ```
+I added one line of code to drive.py to convert the images from RGB to BGR because the model is trained 
+with images imported with cv2.imread which reads images in BGR and drive.py is using RGB mode.
 
 ####3. Submission code is usable and readable
 
