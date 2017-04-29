@@ -25,7 +25,7 @@ from sklearn.model_selection import train_test_split
 train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 
 # Batch generation function
-def generator(samples, batch_size=64):
+def generator(samples, batch_size=128):
   num_samples = len(samples)
   # correction angle for left and right cameras
   correction = 0.2 
@@ -49,28 +49,28 @@ def generator(samples, batch_size=64):
         images.append(left_image)
         images.append(right_image)
         # Augmenting data by flipping images
-        #images.append(cv2.flip(center_image,1)) 
-        #images.append(cv2.flip(left_image,1))
-        #images.append(cv2.flip(right_image,1))      
+        images.append(cv2.flip(center_image,1)) 
+        images.append(cv2.flip(left_image,1))
+        images.append(cv2.flip(right_image,1))      
         # Adding angles
         angles.append(center_angle)
         angles.append(left_angle)
         angles.append(right_angle)
         # Adding augmented iamges angles
-        #angles.append(center_angle*-1.0)
-        #angles.append(left_angle*-1.0)
-        #angles.append(right_angle*-1.0)
+        angles.append(center_angle*-1.0)
+        angles.append(left_angle*-1.0)
+        angles.append(right_angle*-1.0)
         
-   # trim image to only see section with road
+    # passing the training and output values from the samples
     X_train = np.array(images)
     y_train = np.array(angles)
     yield sklearn.utils.shuffle(X_train, y_train)
 
 # compile and train the model using the generator function
-train_generator = generator(train_samples, batch_size=64)
-validation_generator = generator(validation_samples, batch_size=64)
+train_generator = generator(train_samples, batch_size=128)
+validation_generator = generator(validation_samples, batch_size=128)
 
-# NVIDEA Convolutional Neural Network in Keras Here
+# NVIDEA Convolutional Neural Network in Keras
 model = Sequential()
 model.add(Lambda(lambda x: x/127.5 - 1.,input_shape=(160, 320, 3)))
 model.add(Cropping2D(cropping = ((70,25),(0,0))))
@@ -88,8 +88,8 @@ model.add(Dense(1))
 # Compiling model
 model.compile(loss = 'mse',optimizer= 'adam')
 model.fit_generator(train_generator, samples_per_epoch=
-            3*len(train_samples), validation_data=validation_generator,
-            nb_val_samples=3*len(validation_samples), nb_epoch=5)
+            2*3*len(train_samples), validation_data=validation_generator,
+            nb_val_samples=2*3*len(validation_samples), nb_epoch=5)
 
 #saving model
 model.save('model.h5')
