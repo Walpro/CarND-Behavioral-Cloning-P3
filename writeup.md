@@ -1,4 +1,4 @@
-#**Behavioral Cloning** 
+# **Behavioral Cloning** 
 
 ## Writeup
 ---
@@ -67,7 +67,7 @@ The model was trained and validated on different data sets to ensure that the mo
 
 The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
 
-# 4. Appropriate training data
+## 4. Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road data.
 
@@ -93,23 +93,27 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 ### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes.
-Layer 1: 
-Layer 2:
-Layer 3: 
-Layer 4:
-Layer 5: 
-Layer 6:
-Layer 7: 
-Layer 8:
-Layer 9: 
+The final model architecture (model.py lines 74-93) consisted of a convolution neural network with the following layers and layer sizes.
+Layer 1: Normalization layer with input shape of (160, 320, 3)
+Layer 2: Cropping layer to remove the irrelevant image features
+Layer 3: Convulution RELU layer with size (24,5,5)
+Layer 4: Convulution RELU layer with size (36,5,5)
+Layer 5: Convulution RELU layer with size (48,5,5)
+Layer 6: Convulution RELU layer with size (64,5,5)
+Layer 7: 50% Dropeout layer
+Layer 8: Convulution RELU layer with size (64,5,5)
+Layer 9: Flatten Layer
+Layer 10: fully connected Layer with 100 neurons
+Layer 11: fully connected Layer with 50 neurons
+Layer 12: fully connected Layer with 10 neurons
+
 ### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+To capture good driving behavior, I first recorded three laps on track using center lane driving. Here is an example image of center lane driving:
 
 ![alt text][image2]
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover from left and right sides once it finds itself in such a case These images show what a recovery looks like:
 
 ![alt text][image3]
 ![alt text][image4]
@@ -122,11 +126,11 @@ To augment the data sat, I also flipped images and angles thinking that this wou
 ![alt text][image6]
 ![alt text][image7]
 
-Etc ....
 
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+After the collection process, I had  number of data points. I then preprocessed this data by ...
 
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 5 as evidenced by the training and validation loss values that stopped making important decrease after the forth epoch. 
+I used an adam optimizer so that manually training the learning rate wasn't necessary.
