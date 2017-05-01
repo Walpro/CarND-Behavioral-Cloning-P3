@@ -91,18 +91,18 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 ### 2. Final Model Architecture
 
 The final model architecture (model.py lines 74-93) consisted of a convolution neural network with the following layers and layer sizes.
-Layer 1: Normalization layer with input shape of (160, 320, 3)
-Layer 2: Cropping layer to remove the irrelevant image features
-Layer 3: Convulution RELU layer with size (24,5,5)
-Layer 4: Convulution RELU layer with size (36,5,5)
-Layer 5: Convulution RELU layer with size (48,5,5)
-Layer 6: Convulution RELU layer with size (64,5,5)
-Layer 7: 50% Dropeout layer
-Layer 8: Convulution RELU layer with size (64,5,5)
-Layer 9: Flatten Layer
-Layer 10: fully connected Layer with 100 neurons
-Layer 11: fully connected Layer with 50 neurons
-Layer 12: fully connected Layer with 10 neurons
+* Layer 1: Normalization layer with input shape of (160, 320, 3)
+* Layer 2: Cropping layer to remove the irrelevant image features
+* Layer 3: Convulution RELU layer with size (24,5,5)
+* Layer 4: Convulution RELU layer with size (36,5,5)
+* Layer 5: Convulution RELU layer with size (48,5,5)
+* Layer 6: Convulution RELU layer with size (64,5,5)
+* Layer 7: 50% Dropeout layer
+* Layer 8: Convulution RELU layer with size (64,5,5)
+* Layer 9: Flatten Layer
+* Layer 10: fully connected Layer with 100 neurons
+* Layer 11: fully connected Layer with 50 neurons
+* Layer 12: fully connected Layer with 10 neurons
 
 ### 3. Creation of the Training Set & Training Process
 
